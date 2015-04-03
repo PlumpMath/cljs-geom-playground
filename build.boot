@@ -14,3 +14,13 @@
          '[adzerk.boot-cljs      :refer :all]
          '[adzerk.boot-cljs-repl :refer :all]
          '[adzerk.boot-reload    :refer :all])
+
+(deftask start-dev
+  "Start all the things."
+  []
+  (comp (watch)
+        (serve :dir ".")
+        (reload)
+        (cljs-repl)
+        (cljs :compiler-options {:source-map true
+                                 :optimizations :none})))
